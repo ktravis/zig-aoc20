@@ -50,8 +50,7 @@ pub fn main() !void {
     defer numbers.deinit();
 
     var buf: [1024]u8 = undefined;
-    while (true) {
-        var line = (file.reader().readUntilDelimiterOrEof(&buf, '\n') catch break) orelse break;
+    while (file.reader().readUntilDelimiterOrEof(&buf, '\n')) |line| {
         var parsed = std.fmt.parseInt(i32, std.mem.trimRight(u8, line, "\r\n"), 0) catch |err| {
             print("failed to parse integer from line '{}': {}\n", .{line, err});
             return;

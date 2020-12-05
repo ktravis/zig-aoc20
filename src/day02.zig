@@ -33,8 +33,7 @@ pub fn main() !void {
 
     var buf: [1024]u8 = undefined;
     var valid_count: u32 = 0;
-    while (true) {
-        var line = (file.reader().readUntilDelimiterOrEof(&buf, '\n') catch break) orelse break;
+    while (try file.reader().readUntilDelimiterOrEof(&buf, '\n')) |line| {
         var token_it = std.mem.split(line, "-");
         const low = try std.fmt.parseInt(u32, token_it.next().?, 0);
         token_it.delimiter = " ";

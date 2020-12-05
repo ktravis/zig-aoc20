@@ -28,8 +28,7 @@ pub fn main() !void {
     defer grid.deinit();
     var lines = std.mem.split(input, "\n");
 
-    while (true) {
-        const line = lines.next() orelse break;
+    while (lines.next()) |line| {
         var row : [W]bool = undefined;
         for (line) |c, x| {
             row[x] = (c == '#');
