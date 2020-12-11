@@ -13,7 +13,7 @@ const Adapter = struct {
     }
 
     fn pathsTo(self: *@This()) usize {
-        if (self.cached_count != 0) return self.cached_count;
+        // if (self.cached_count != 0) return self.cached_count;
         if (self.possible_parents.len == 0) return 1;
         var sum: usize = 0;
         for (self.possible_parents) |*p| sum += p.pathsTo();
